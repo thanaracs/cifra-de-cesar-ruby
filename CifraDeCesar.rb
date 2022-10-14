@@ -3,16 +3,8 @@
 
 puts "-- CIFRA DE CESAR ---\n\n"
 puts "1 - Encrypted \n2 - Descrypted\nInform the Option:"
-option = gets.chomp.to_s
+option = gets.chomp.to_i
 
-
-unless option == nil
-    puts "Inform the word:"
-    word = gets.chomp
-    
-    puts "Inform the key:"
-    key = gets.chomp.to_i
-end
 
 def encryptedDados(word, key)
     new_word = ""
@@ -73,36 +65,36 @@ def descrypted(word,key)
 
         # Validando letras minusculas
         if (a >= 65 && a <= 90)
-            b = (a + key)
+            b = (a - key)
 
             # Validando a soma caso passe da letra |Z|
             if (b > 90)
-                b = (b - 90) + 64 
+                b = (b + 90) - 64 
             end
             new_word += b.chr
 
         # Validando letras maiusculas
         elsif (a >= 97 && a <= 122) 
-            b = (a + key)
+            b = (a - key)
 
             # Validando a soma caso passe da |z|
             if (b > 122)
-                b = (b - 122) + 96 
+                b = (b + 122) - 96 
             end
             new_word += b.chr
     
         # Validando Numeros
         elsif (a >= 48 && a <= 57)
-            b = (a + key)
+            b = (a - key)
 
             # Validando o número caso passe de |9|
             if ( b > 57)
-                b = (b - 57) + 47
+                b = (b + 57) - 47
             end
             new_word += b.chr
         elsif #validando caso tenha  espaço
-            if(a == 32)
-            b = "#"
+            if(a == 35)
+            b = " "
             new_word += b.chr
             end
         else #validando caso tenha caracteres desconhecidos
@@ -114,8 +106,25 @@ def descrypted(word,key)
     new_word
 end
 
-new_word = encryptedDados(word, key)  #DEVE SER CHAMADO ABAIXO DO METODO /FUNCAO
+unless option == nil
+    puts "Inform the word:"
+    word = gets.chomp
+    
+    puts "Inform the key:"
+    key = gets.chomp.to_i
 
-puts "Word encrypted: #{new_word}"
-puts "Word inform: #{word}"
+    if (option == 1)
+        new_word = encryptedDados(word, key)  #DEVE SER CHAMADO ABAIXO DO METODO /FUNCAO
+        puts "Word inform: #{word}"
+        p
+        puts "Word Encrypted: #{new_word}"
+        
+    elsif (option == 2)
+        new_word = descrypted(word, key)
+        puts "Word inform: #{word}"
+        p
+        puts "Word Descrypted: #{new_word}"
+        
+    end
+end
 
